@@ -1,4 +1,6 @@
 import { useLoaderData, useParams } from "react-router-dom"
+import { addToStoredReadList } from "../../markasread/Markasread"
+import { addToWishList } from "../addToWishList/addTowishList"
 
 
 export default function BookDetail() {
@@ -10,6 +12,17 @@ export default function BookDetail() {
     const book = data.find(book => book.bookId == id)
     const { image, bookId: currentBookId, bookName, author, review, totalPages, rating, category, tags, publisher, yearOfPublishing } = book
     console.log(book)
+
+    const handleMarkAsReadList = (id) => {
+
+        addToStoredReadList(id)
+    }
+
+    const addToWisList = (id) => {
+        addToWishList(id)
+    }
+
+    
     return (
         <div className="my-10">
             <section className="flex flex-col md:flex-row gap-16 ">
@@ -31,13 +44,13 @@ export default function BookDetail() {
                         }
                     </div>
                     <hr />
-                    <p className="text-gray-400">Number Of Pages: <span  className="text-black text-xl font-semibold">{totalPages}</span></p>
+                    <p className="text-gray-400">Number Of Pages: <span className="text-black text-xl font-semibold">{totalPages}</span></p>
                     <p>Publisher: {publisher}</p>
                     <p>Year Of Publishing: {yearOfPublishing}</p>
                     <p>Rating: {rating}</p>
                     <div className="gap-4 flex">
-                        <button className="px-4 py-2 border rounded-md text-[#23BE0A]">Read</button>
-                        <button className="px-4 py-2 border rounded-md text-[#23BE0A]">Wish List</button>
+                        <button onClick={() => handleMarkAsReadList(bookId)} className="px-4 py-2 border rounded-md text-[#23BE0A]"> Mark As Read</button>
+                        <button onClick={()=>addToWisList(bookId)} className="px-4 py-2 border rounded-md bg-[#23BE0A] text-[#fff]">Add to Wish List</button>
                     </div>
                 </div>
 
