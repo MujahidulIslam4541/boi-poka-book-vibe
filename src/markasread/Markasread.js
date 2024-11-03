@@ -1,30 +1,30 @@
 
 
-const getTheMarkAsRead=()=>{
+const getTheMarkAsRead = () => {
 
-    const storedListStr=localStorage.getItem('read-list')
-    if(storedListStr){
-        const storedListPares=JSON.parse(storedListStr);
+    const storedListStr = localStorage.getItem('read-list')
+    if (storedListStr) {
+        const storedListPares = JSON.parse(storedListStr);
         return storedListPares;
     }
-    else{
+    else {
         return [];
     }
 
 }
 
-const addToStoredReadList=(id)=>{
-    const getStoredList=getTheMarkAsRead()
+const addToStoredReadList = (id) => {
+    const getStoredList = getTheMarkAsRead()
 
     // already existed this item,do not it
-    if(getStoredList.includes(id)){
-        console.log(id,'This book already existed the read list')
+    if (getStoredList.includes(id)) {
+        console.log(id, 'This book already existed the read list')
     }
-    else{
+    else {
         getStoredList.push(id)
-         const storedListStr=JSON.stringify(getStoredList);
-         localStorage.setItem('read-list',storedListStr);
+        const storedListStr = JSON.stringify(getStoredList);
+        localStorage.setItem('read-list', storedListStr);
     }
 }
 
-export {addToStoredReadList}
+export { addToStoredReadList, getTheMarkAsRead }
